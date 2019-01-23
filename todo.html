@@ -4,7 +4,14 @@
         <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
         <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
         <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
         <title>Todo</title>
+        <style>
+            .row {
+                margin: 0px;
+                padding: 0px;
+            }
+        </style>
     </head>
     <body>
         <div id="app"></div>
@@ -14,17 +21,33 @@
                 constructor(props) {
                     super(props);
                     this.state = {
-                        content: this.props.text
+                        content: this.props.text,
+                        visible: true
                     }
                 }
 
                 render() {
-                    return (
-                        <div>
-                            <p>{this.props.text}</p>
-                            <button>X</button>
-                        </div>
-                    );
+                    if (this.state.visible) {
+                        return (
+                            <div className="container">
+                                <div className="row">
+                                    <div className="col-sm">
+                                        <button onClick={this.toggle}>✓</button>
+                                    </div>
+                                    <div className="col-sm">
+                                        <p>{this.props.text}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        );
+                    }
+                    return (<div></div>);
+                }
+
+                toggle = () => {
+                    this.setState(state => ({
+                        visible: !state.visible
+                    }));
                 }
             }
 
