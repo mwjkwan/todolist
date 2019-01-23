@@ -7,6 +7,9 @@
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
         <title>Todo</title>
         <style>
+            body {
+                text-align: center;
+            }
             .row {
                 margin: 0px;
                 padding: 0px;
@@ -21,7 +24,6 @@
                 constructor(props) {
                     super(props);
                     this.state = {
-                        content: this.props.text,
                         visible: true
                     }
                 }
@@ -71,7 +73,7 @@
                                 )}
                             </ul>
                             <div>
-                                <input onChange={this.handleChange} value={this.state.input} />
+                                <input onKeyPress={this.inputKeyPress} onChange={this.handleChange} value={this.state.input} />
                                 <button onClick={this.addTask}>Add Task</button>
                             </div>
                         </div>
@@ -82,6 +84,13 @@
                     this.setState({
                         input: event.target.value
                     });
+                }
+
+                inputKeyPress = (event) => {
+                    if (event.key === "Enter") {
+                        console.log("Pressed enter")
+                        this.addTask()
+                    }
                 }
 
                 addTask = () => {
